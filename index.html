@@ -4,374 +4,203 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Australian National Botanic Gardens Mobile Web Application</title>
+  <title>MERCER X</title>
   <style>
-    .container{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-family: "Lucida Console", Arial, Helvetica, sans-serif;
-    }
-    .container header, h1, h2, h3, p, section {
-      width:80vw;
-    }
-    header{
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-    .logo{
-      height: 3vw;
-      width: 3vw;
-      padding: 1vw;
-    }
-    h1, cite, h3{
-      color: #71A9A2;
-    }
-    h2{
-      color: #F5B917;
-    }
-    .currentMap{
-      width: 80vw;
-    }
-    section{
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    .phone{
-      align-self: flex-start;
-      width:12.5vw;
-      padding:.5vw;
-    }
-    @media (max-width: 599px) {
-      .phone{
-        align-self: flex-start;
-        width:40vw;
-        padding:.5vw;
-      }      
-    }
-    @media (max-width: 900px) {
-      .phone{
-        align-self: flex-start;
-        width:33vw;
-        padding:.5vw;
-      }  
-    } 
+  :root{
+    --SaddleBrown:#541D17;
+    --MidnightBlue:#193D59;
+    --DarkSlateGray:#0F1217;
+    --OldRose:#AC4F57;
+    --LightSlateGray:rgba(67, 89, 98, 0.65); /* #435962; */
+    --videoWidth:80vw;
+    --videoHeight:calc(var(--videoWidth)*.562);
+    --navFontSize:2vw;
+  }  
+  @font-face {
+    font-family: 'Gunplay';
+    src:url('./assets/gunplay rg.ttf')  format('truetype');
+    color: var(--DarkSlateGray)
+  }
+  body{
+    background-color: var(--LightSlateGray);
+    margin:0;
+    /* opacity: 0.5; */
+  }
+  div{
+    font-size: var(--navFontSize);
+    padding: .25em;
+  }    
+  h1, h2, div {
+    font-family: 'Gunplay';
+  }
+  h1{
+    font-size: 5em;
+    font-weight: lighter;
+    color: var(--MidnightBlue);
+  }
+  h2{
+    font-size: 3em;
+    font-weight: lighter;        
+    color:var(--OldRose)
+  }
+  p {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  ul.share-buttons{
+  list-style: none;
+  padding: 0;
+}
 
-  </style>
+/* https://simplesharingbuttons.com/#code */
+  ul.share-buttons li{
+    display: inline;
+  }
+
+  ul.share-buttons .sr-only{
+    position: absolute;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+  }
+
+  ul.share-buttons img{
+    width: 32px;
+  }  
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  p{
+    width: 80vw;
+    padding: 1vw;
+  }
+  .images{
+    width: 80vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .images > img{
+    width: 35vw;
+    padding: 1vw;
+  }
+  /* Smartphones (portrait and landscape) ----------- */
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .images{
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    }    
+    .images > img{
+    width: 80vw;
+    padding: 1vw;
+    }
+  }
+  header{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: flex-end; */
+    flex-wrap: wrap;
+    z-index: 1;
+    background-color: var(--OldRose);
+    width:100vw;
+    padding: 0;
+  }
+  .empty{
+    width:60vw;
+  }
+  .navigation{
+    flex: 12.5vw;
+  }
+  .navigation-container{
+    display: flex;
+    flex-direction: row;
+  }
+  .video-size{
+    width:var(--videoWidth);
+    height: var(--videoHeight);
+  }
+  @-webkit-keyframes blinker {
+  from {opacity: 1.0;}
+  to {opacity: 0.0;}
+  }
+  .blink{
+    text-decoration: blink;
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 0.6s;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-timing-function:ease-in-out;
+    -webkit-animation-direction: alternate;
+  } 
+</style>
+<script>
+function s(classname){
+  let [element] = document.getElementsByClassName(classname)
+  element.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+}
+</script>  
 </head>
 <body>
-  <div class='container'>
-    
-  <header><img src="./images/anbg-logo.gif" class="logo"><h1 class=MsoTitle>Australian National Botanic Gardens Mobile Web Application</h1></header>
-  
-  <h3>Student number: u3155706</h3>
-
-  <h2>Introduction</h2>
-  
-  <p>The Australian National Botanic Gardens is 40 hectares in
-  size being located in the nation's capital of Canberra the garden was designed
-  to be of scientific purpose and not just ornamental purpose <cite>(Australian
-      National Botanic Gardens, 2018)</cite>. The gardens contain
-  approximately 74,000 individual plants and the collection features more than
-  6,200 species of plants that comprise approximately one third of Australia's native
-  plants making the gardens the largest scientific collection of Australian
-  native plants originating from wild plant sources.<cite>(Australian National Botanic Gardens, 2018)</cite></p>
-  
-  
-  <h2>Content and context</h2>
-  
-  <p>At present the Australian National Botanic Gardens engages
-  visitors digitally mostly through a website. The website has many useful
-  features such as the ability to search for plants located in the gardens with
-  the plants location being shown on an illustrated map. Another useful feature of
-  the existing website is the feature that provides the visitor the ability to
-  search and browse a catalogue of images of plants. Unfortunately the website
-  has not been designed to adapt to be used from mobile devices and is not
-  responsive. This doesn't allow visitors to navigate the gardens while accessing
-  information about plants from their mobile device. Visit the current map at <a href="https://www.anbg.gov.au/gardens/living/ANBG_section_map/index.html?sectionToHighlight">https://www.anbg.gov.au/gardens/living/ANBG_section_map/index.html?sectionToHighlight</a></p>
-
-  <img src="./images/currentMap.png" class="currentMap">
-  
-  <h2>Existing design solutions</h2>
-  
-  <p>An example of a mobile friendly approach to providing
-  visitors information to navigate the gardens is the free iPhone application 'ANBG
-  Birds' produced by the Director of National Parks. This application catalogues
-  the resident and migratory birds that inhabit the Australian National Botanic
-  Gardens providing the visitors the ability to journey through a range of
-  habitats the birds appear in. The application displays for 60 birds images of
-  the birds, sounds of the bird calls and descriptions of the bird species. The
-  application includes information about walks visitors can take to find the
-  specific birds in the gardens. The application also has a feature to create itineraries
-  to help visitors make the most of their trip to the Gardens.<cite>(Apple, 2018)</cite></p>
-
-  <section>
-    <img src="./images/Birds/1.jpg" class="phone">
-    <img src="./images/Birds/2.jpg" class="phone">
-    <img src="./images/Birds/3.jpg" class="phone">
-    <img src="./images/Birds/4.jpg" class="phone">
-    <img src="./images/Birds/5.jpg" class="phone">
-  </section>
-  <cite>(Apple, 2018)</cite>
-
-  <p>The Royal Botanic Garden Sydney iPhone application has the
-  most modern existing design solution related to the proposed mobile web application
-  for the Australian National Botanic Gardens. The application features
-  self-guided walking tours containing audio using an augmented reality (AR)
-  overlay to enrich the visitor experience. The application also contains
-  information about the history of the Royal Botanic Garden Sydney, a feature to
-  assist visitors to discover restaurants, amenities and landmarks within the
-  garden, information about current events and exhibitions located in the garden
-  and Apple Watch integration to provide real-time wayfinding and navigation to
-  visitors.<cite>(Apple, 2018)</cite></p>
-
-  <section>
-    <img src="./images/Sydney/1.jpg" class="phone">
-    <img src="./images/Sydney/2.jpg" class="phone">
-    <img src="./images/Sydney/3.jpg" class="phone">
-    <img src="./images/Sydney/4.jpg" class="phone">
-    <img src="./images/Sydney/5.jpg" class="phone">
-  </section>
-  <cite>(Apple, 2018)</cite>
-
-  <p>Another iPhone application that is a companion to the Royal
-  Botanic Garden Sydney iPhone application is The Australian PlantBank
-  iPhone application. This application is targeted at providing information about
-  the PlantBank's seed vault research into helping to
-  restore threatened habitats, conserve wild plant diversity, and provide for a
-  healthy and sustainable future. Visitors can see the living laboratory of garden
-  beds and the endangered Cumberland Plain Woodland to learn about the research
-  in real life.<cite>(Apple, 2018)</cite></p>
-
-  <section>
-    <img src="./images/PlantBank/1.jpg" class="phone">
-    <img src="./images/PlantBank/2.jpg" class="phone">
-    <img src="./images/PlantBank/3.jpg" class="phone">
-    <img src="./images/PlantBank/4.jpg" class="phone">
-    <img src="./images/PlantBank/5.jpg" class="phone">
-  </section>
-  <cite>(Apple, 2018)</cite>
-
-  <p>One of the best researched mobile applications for a state
-  operated garden was completed by the Kew Royal Botanic Gardens. During October
-  2010 Kew Gardens commissioned an in-depth study of their visitors' motivations
-  and information needs when visiting the garden's 300-acre site. The express aim
-  of the study was that the finding should guide the development of new mobile
-  applications. Upon completion of the study it was found that most Kew Gardens visitors
-  had social, emotional, and spiritual, rather than intellectual, motivations
-  during their time at the gardens. They did not visit the gardens to find out
-  more and they did not want or need to know their precise location at all times.
-  It was discovered that the visitors loved the sense of unguided exploration and
-  the serendipitous discoveries they made at Kew Gardens. A term was coined that
-  captured the emotional sense that most visitors enjoyed while visiting the
-  gardens, the visitors wanted to become 'delightfully lost.'<cite>(Museumsandtheweb.com,2018)</cite></p>
-  
-  <section>
-      <img src="./images/Kew/1.jpg" class="phone">
-      <img src="./images/Kew/2.jpg" class="phone">
-      <img src="./images/Kew/3.jpg" class="phone">
-      <img src="./images/Kew/4.jpg" class="phone">
-      <img src="./images/Kew/5.jpg" class="phone">
-  </section>
-  <cite>(Museumsandtheweb.com,2018)</cite>
-
-  <p>Based on this research an iPhone application was created and
-  further research on its effectiveness was conducted with visitors who used the
-  design. The understanding of audience motivations informed the development of
-  the Kew Gardens application using the term of 'delightfully lost' to guide the
-  application's design and development to conform to that purpose. The application
-  would not provide a structured route opting to aim to provide suggestions of items
-  to explore thereby taking visitors in new directions and away from habitual
-  routes.'A key focus of the design was to
-  avoid visitors being wedded to the phone visually. The application was designed
-  to be a tool used in the periphery of the garden experience. The visitor would
-  use the application throughout the journey around the garden moving the application
-  to the centre of their focus and back to the periphery as little or often as
-  the visitor desired. To facilitate a serendipitous discovery experience of the
-  Gardens the application included the following features.
-  A map with GPS location detection technology
-  for orientation and user customization options allowing the visitor's interests
-  to be saved to the map. An augmented reality overlay designed to encourage visitor
-  discoveries via exploration of the gardens the augmented reality would also
-  display the location of trees. A QR code reader allows visitors to scan plants
-  and link to in-app content with detailed text and audio visual information
-  about the plant being scanned. A photo sharing feature using the Flickr social
-  media website that allows social image sharing via uploads by Kew Gardens staff and visitors designed to encourage visitors
-  away from their habitual visitation patterns. Finally an image gallery of
-  images grouped in themes with the themes designed to encourage visitors to walk
-  around the gardens.<cite>(Electronic Workshops in Computing (eWiC), 2018)</cite></p>
-
-  <h2>Insights from existing design solutions</h2>
-  
-  <p>A key insight to be
-  taken from the existing design solutions is that based on the Kew Gardens
-  research visitors to the Australian National Botanic Gardens will also likely
-  want the application we create to allow them to be 'delightfully lost'.<cite>(Museumsandtheweb.com,
-      2018)</cite> This means the application
-      is designed to assist and inspire visitors to explore the gardens.</p>
-  
-  <p>Another important insight
-  comes once again from the Kew Gardens application although this time it relates
-  to a survey conducted on the errors that users of the application experienced.
-  It was found that a large number of visitors who used the application
-  experienced technical difficulties associated with the download procedure for
-  application updates. The update procedure gave the visitors the latest
-  recommendations which are driven by seasonal changes in landscape. The problem
-  specifically was that when visitors moved away from arrival gates and into the
-  garden the garden provided WiFi could not transmit to
-  their phones and the updates then needed to rely on the phones data 3G signal. If
-  the users did not have the 3G enabled they would receive the latest updates.<cite>(Museumsandtheweb.com, 2018)</cite></p>
-
-  <h2>Design proposal</h2>
-  
-  <p>The proposed design is a mobile web application that seeks
-  to provide visitors to the gardens a navigation tool that extends existing
-  scientific knowledge published by the gardens into the real world while
-  visitors explore the gardens. In order
-  to incorporate the lessons from existing research the application's features will
-  be an interactive map, a plant identification feature that displays information
-  about the plant being viewed, social media integration for visitor photo
-  sharing and a list of routes that updates based on the seasonal state of the
-  gardens. The application will aim to use the existing information on the existing
-  Australian National Botanic Gardens website such as the image database of the
-  plants. External detailed descriptions of the plants can be attained from the
-  Plant Breeders Rights database and Wikipedia.</p>
-
-  <section>
-      <img src="./images/App/1.png" class="phone">
-      <img src="./images/App/2.png" class="phone">
-      <img src="./images/App/3.png" class="phone">
-      <img src="./images/App/4.png" class="phone">
-      <img src="./images/App/5.png" class="phone">
-  </section>  
-  
-  <h2>Technical specifications</h2>
-  
-  <p>The interactive map
-  will use the Geolocation API to locate the visitor's location in the gardens
-  and display the location on a map.</p>
-  
-  <p>The plant
-  identification feature will use the phone video camera to sample images of the
-  plant and in real world information to identify the plant in the phone camera
-  view port via the MediaStream API's.</p>
-  
-  <p>The MediaStream API's will be used to take and access the visitors
-  photo's allowing the visitor to upload the photo's to social media when they have
-  an internet connection.</p>
-  
-  <p>The list of routes
-  will be transferred to the phone via a JSON file, most likely using the GeoJSON format to display the routes. To avoid the update
-  errors experience by other applications this application will take advantage of
-  the Service Worker API and specifically the background sync feature to update
-  the route around the garden in the background even while the visitor is not on
-  the url of the application.</p>
-  
-  <p>The data storage
-  will be achieved by using the Service Worker API and localStorage
-  API allowing the visitors to access information about plants whether they are
-  connected to the internet at the time of using the application or not.</p>
-  
-  <h2>Prototype</h2>
-  
-  <p>Below is a prototype</p>
-  
-  <p><a
-  href="https://invis.io/KJGLASKFX95" target="_blank">https://invis.io/KJGLASKFX95</a></p>
-  
-  <h2>Product backlog</h2>
-  
-  <h3>Client</h3>
-  
-  <p>As a client I require that the garden be represented in a
-  positive inclusive fashion. <br>
-  
-  As a client I require the application to be accessible to
-  the widest amount of community members and be technically capable of serving
-  various amounts of traffic. <br>
-  
-  As a client I require the application to increase visitor
-  interest and visitor satisfaction when visiting the gardens.</p>
-  
-  <p>&nbsp;</p>
-  
-  <h3>User</h3>
-  
-  <p>As a user I desire an application to assist me explore
-  the gardens. <br>
-  As a user I desire an application that works well on my
-  device. <br>
-  As a user I desire to share my experience at the gardens
-  with others.</p>
-  
-  <h3>Developer</h3>
-  
-  <p>As a developer I need to make certain that all information
-  is presented in a useable and accessible format. <br>
-  
-  As a developer I need to gather garden assets such as
-  information in the form of text and style guides in the form of colours and images
-  to be used in the application. <br>
-  
-  As a developer I need to code the application so that it is
-  used effectively by different types of users. <br>
-  
-  As a developer I need to code the geolocation API to
-  assist the user's navigation when using the application. <br>
-  
-  As a developer I need to code the local storage API to
-  allow the users to save information when using the application. <br>
-  
-  As a developer I need to code the media streams API to
-  allow the users to take photos when using the application. <br>
-  
-  As a developer I need to code the user interface to allow
-  the users to access all the features of the application.</p>
-  
-  <p>&nbsp;</p>
-  
-  <p>&nbsp;</p>
-  
-  <h2>Summary</h2>
-  
-  <p>In summary the Australian
-  National Botanic Gardens Mobile Web Application uses research an inspiration of
-  existing applications that attempt to solve similar problems with modern web
-  API's to provide visitors a mobile tool of exploration to be used in the
-  gardens providing valuable information whether they are connected to the internet
-  at the time or not.</p>
-  
-   <h2>Bibliography</h2>
-    <p>Apple. (2018). <i>ANBG
-    Birds</i>. Retrieved from
-    https://itunes.apple.com/au/app/anbg-birds/id644118110?mt=8</p>
-    <p>Apple. (2018). <i>Royal
-    Botanic Garden Sydney</i>. Retrieved from
-    https://itunes.apple.com/au/app/royal-botanic-garden-sydney/id1332941220?mt=8</p>
-    <p>Apple. (2018). <i>The
-    Australian PlantBank</i>. Retrieved from
-    https://itunes.apple.com/au/app/the-australian-plantbank/id763344284?mt=8</p>
-    <p>Australian
-    National Botanic Garden. (2018). <i>The Plant Records Unit</i>. Retrieved
-    from Australian National Botanic Garden: https://www.anbg.gov.au/gardens/living/records/index.html</p>
-    <p>Australian
-    National Botanic Gardens. (2018). <i>Australian National Botanic Gardens</i>.
-    Retrieved from https://www.anbg.gov.au/gardens/about/history/index.html</p>
-    <p>Australian
-    National Botanic Gardens. (2018). <i>Our living collection</i>. Retrieved
-    from https://www.anbg.gov.au/gardens/living/</p>
-    <p>Electronic
-    Workshops in Computing (eWiC). (2018). <i>A study of the iPhone app at Kew
-    Gardens: Improving the visitor experience</i>. Retrieved from
-    https://ewic.bcs.org/content/ConMediaFile/20321</p>
-    <p>Museumsandtheweb.com.
-    (2018). <i>Delightfully Lost: A New Kind of Wayfinding at Kew</i>. Retrieved
-    from Museumsandtheweb.com:
-    https://www.museumsandtheweb.com/mw2012/papers/delightfully_lost_a_new_kind_of_wayfinding_at_.html</p>
-  </div>
-
-  </body>
-  
+  <header>
+    <div class="empty"></div>
+    <div class="navigation-container">
+        <div clsss="navigation"onclick="s('mercerism')">Mercerism</div>
+        <div clsss="navigation"onclick="s('broadcast')">Broadcast</div>
+        <div clsss="navigation"onclick="s('device')">Device</div>
+        <div clsss="navigation"onclick="s('media')">Media</div>
+    </div>
+  </header>
+  <main>
+    <h1>MERCER X Device</h1>
+    <h2 class="mercerism">Mercerism</h2>
+    <section>
+      <p>
+        Mercerism is our dominant religion.  Mercerism  binds our community together the empath of Mercer creates a togetherness  in our community. We share in Mercer's past experience of climbing a steep hill with rocks being thrown at him. Mercer’s eternal climb up the hill while being pelted with rocks to reach his enlightenment at the top. Mercer is our figurehead.
+      </p>
+      <p>
+        Watch the Mercer X Device in action through this video. The device is design to allow us to empathize with Mercer in a deep and transformative way.
+      </p>
+    </section>
+    <iframe class="video-size" src="https://www.youtube.com/embed/5DwMlcHgNW8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <h2 class="broadcast">Rouge broadcast</h2>
+    <section>
+      <p>
+        The message below was hacked into this website as a warning from Buster. <b class="blink">Avoid my warning at your own peril.</b> 
+      </p>
+    </section>
+    <audio controls src="./assets/mercer.wav"></audio>
+    <h2 class="device">The Mercer X device</h2>
+    <section class="images">
+      <p>
+        See the device and the process of construction in the images below.
+      </p>
+      <img src="./assets/printing_1.jpg" alt="photo of Mercer X devic being 3d printed">
+      <img src="./assets/printing_2.jpg" alt="photo of Mercer X devic being 3d printed">
+      <img src="./assets/front_view.jpg" alt="photo of Mercer X devic being viewed from the front">
+      <img src="./assets/inside.jpg" alt="photo of hand holding the Mercer X device indoors">
+      <img src="./assets/outside.jpg" alt="photo of hand holding the Mercer X device outdoors">
+    </section>
+    <h2 class="media">Follow us on social media</h2>
+    <section>
+      <ul class="share-buttons">
+          <li><a href="https://www.facebook.com/Mercerxdevice/" title="Share on Facebook" target="_blank"><img alt="Share on Facebook" src="./assets/Facebook.svg" /></a></li>
+          <li><a href="https://twitter.com/mercerxdevice" target="_blank" title="Tweet"><img alt="Tweet" src="./assets/Twitter.svg" /></a></li>
+          <li><a href="https://www.reddit.com/user/Mercerxdevice/" target="_blank" title="Submit to Reddit"><img alt="Submit to Reddit" src="./assets/Reddit.svg" /></a></li>
+          <li><a href="mailto:?MercerXDevice@gmail.com" target="_blank" title="Send email"><img alt="Send email" src="./assets/Email.svg" /></a></li>
+        </ul>      
+    </section>
+  </main>
+</body>
 </html>
