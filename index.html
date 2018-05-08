@@ -14,7 +14,8 @@
     --LightSlateGray:rgba(67, 89, 98, 0.65); /* #435962; */
     --videoWidth:80vw;
     --videoHeight:calc(var(--videoWidth)*.562);
-    --navFontSize:2vw;
+    --navFontSizeLarge:2vw;
+    --navFontSizeMobile:4vw;
   }  
   @font-face {
     font-family: 'Gunplay';
@@ -24,10 +25,9 @@
   body{
     background-color: var(--LightSlateGray);
     margin:0;
-    /* opacity: 0.5; */
   }
   div{
-    font-size: var(--navFontSize);
+    font-size: var(--navFontSizeLarge);
     padding: .25em;
   }    
   h1, h2, div {
@@ -37,6 +37,7 @@
     font-size: 5em;
     font-weight: lighter;
     color: var(--MidnightBlue);
+    padding: 1vh;
   }
   h2{
     font-size: 3em;
@@ -106,20 +107,22 @@
     width: 80vw;
     padding: 1vw;
     }
+    div{
+    font-size: var(--navFontSizeMobile);
+    padding: .25em;
+  }   
   }
   header{
     position: fixed;
     display: flex;
     flex-direction: row;
-    /* justify-content: flex-end; */
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     z-index: 1;
     background-color: var(--OldRose);
     width:100vw;
     padding: 0;
-  }
-  .empty{
-    width:60vw;
   }
   .navigation{
     flex: 12.5vw;
@@ -154,7 +157,6 @@ function s(classname){
 </head>
 <body>
   <header>
-    <div class="empty"></div>
     <div class="navigation-container">
         <div clsss="navigation"onclick="s('mercerism')">Mercerism</div>
         <div clsss="navigation"onclick="s('broadcast')">Broadcast</div>
